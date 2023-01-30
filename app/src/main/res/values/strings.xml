@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Nolimy</string>
+    <string name="now_year">2023</string>
+    <string name="t_continue">Continue</string>
+    <string name="skip"><u>Skip</u></string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="users">Users</string>
+    <string name="profile">Profile</string>
+    <string name="read">Read</string>
+    <string name="search">Search</string>
+</resources>
