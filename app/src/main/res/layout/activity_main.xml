@@ -48,6 +48,6 @@
         android:layout_height="30dp"
         android:layout_above="@+id/relative_bottom"
         android:layout_marginBottom="0dp"
-        android:background="@drawable/bg_gradient_shadow" />
+        android:background="@drawable/bg_gradient_shadow_bottom" />
 
 </RelativeLayout>

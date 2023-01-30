@@ -1,22 +1,22 @@
 package ru.xbitly.nolimy.db.entities.my;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.graphics.drawable.Drawable;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
 
 import ru.xbitly.nolimy.db.entities.main.Card;
 
 @Entity
 public class MyCard extends Card {
 
+    //TODO: converter for drawable
     @ColumnInfo(name = "background")
-    private Drawable background;
+    private String background;
 
-    public Drawable getBackground() {
+    public String getBackground() {
         return background;
     }
 
-    public void setBackground(Drawable background) {
+    public void setBackground(String background) {
         this.background = background;
     }
 }

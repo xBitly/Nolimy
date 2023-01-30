@@ -4,29 +4,28 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.util.List;
+
 import ru.xbitly.nolimy.db.system.DatabaseClient;
 
-public class MyCardGet extends AsyncTask<Void, Void, Void> {
+public class MyCardGet extends AsyncTask<Void, Void, List<MyCard>> {
 
     @SuppressLint("StaticFieldLeak")
     private final Context context;
-    private final MyCard myCard;
 
-    public MyCardGet(Context context, MyCard myCard){
+    public MyCardGet(Context context){
         this.context = context;
-        this.myCard = myCard;
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
-        DatabaseClient.getInstance(context).getAppDatabase()
+    protected List<MyCard> doInBackground(Void... voids) {
+        return DatabaseClient.getInstance(context).getAppDatabase()
                 .myCardDao()
                 .getAll();
-        return null;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(List<MyCard> myCardList) {
+        super.onPostExecute(myCardList);
     }
 }

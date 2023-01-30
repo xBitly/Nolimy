@@ -1,7 +1,7 @@
 package ru.xbitly.nolimy.db.system;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
 
 import ru.xbitly.nolimy.db.entities.alien.AlienCard;
 import ru.xbitly.nolimy.db.entities.alien.AlienCardDao;

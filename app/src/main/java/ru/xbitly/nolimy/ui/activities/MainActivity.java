@@ -5,10 +5,14 @@ import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import ru.xbitly.nolimy.db.entities.alien.AlienCard;
+import ru.xbitly.nolimy.db.entities.alien.AlienCardGet;
+import ru.xbitly.nolimy.db.entities.alien.AlienCardSave;
 import ru.xbitly.nolimy.ui.fragments.ProfileFragment;
 import ru.xbitly.nolimy.ui.fragments.UsersFragment;
 import ru.xbitly.nolimy.R;
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton imageButtonRead = findViewById(R.id.read);
 
         ProfileFragment profileFragment = new ProfileFragment();
-        UsersFragment usersFragment = new UsersFragment();
+        UsersFragment usersFragment = new UsersFragment(this);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
@@ -42,7 +46,14 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.users);
 
         imageButtonRead.setOnClickListener(view -> {
-            Toast.makeText(this, "Read", Toast.LENGTH_SHORT).show();
+
+            AlienCard alienCard = new AlienCard();
+            alienCard.setName("Testov Test");
+            alienCard.setDescription("Tester");
+            alienCard.setContent(null);
+            AlienCardSave alienCardSave = new AlienCardSave(this, alienCard);
+            alienCardSave.execute();
+
         });
     }
 }

@@ -3,30 +3,40 @@ package ru.xbitly.nolimy.db.entities.alien;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 import ru.xbitly.nolimy.db.system.DatabaseClient;
+import ru.xbitly.nolimy.ui.recycler.AlienCardsListAdapter;
 
-public class AlienCardGet extends AsyncTask<Void, Void, Void> {
+public class AlienCardGet extends AsyncTask<Void, Void, List<AlienCard>> {
 
     @SuppressLint("StaticFieldLeak")
     private final Context context;
-    private final AlienCard alienCard;
+    private RecyclerView recyclerView;
 
-    public AlienCardGet(Context context, AlienCard alienCard){
+    public AlienCardGet(Context context){
         this.context = context;
-        this.alienCard = alienCard;
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
-        DatabaseClient.getInstance(context).getAppDatabase()
+    protected List<AlienCard> doInBackground(Void... voids) {
+        return DatabaseClient.getInstance(context).getAppDatabase()
                 .alienCardDao()
                 .getAll();
-        return null;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(List<AlienCard> alienCardList) {
+        super.onPostExecute(alienCardList);
+        AlienCardsListAdapter adapter = new AlienCardsListAdapter(alienCardList, context);
+        if (recyclerView != null) recyclerView.setAdapter(adapter);
+    }
+
+    public void setRecyclerView(RecyclerView recyclerView){
+        this.recyclerView = recyclerView;
     }
 }

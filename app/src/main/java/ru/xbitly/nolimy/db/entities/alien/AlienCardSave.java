@@ -3,6 +3,7 @@ package ru.xbitly.nolimy.db.entities.alien;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import ru.xbitly.nolimy.db.system.DatabaseClient;
 

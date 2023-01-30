@@ -1,11 +1,10 @@
 package ru.xbitly.nolimy.db.entities.main;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.util.Map;
 
 @Entity
 public abstract class Card implements Serializable {
@@ -19,8 +18,9 @@ public abstract class Card implements Serializable {
     @ColumnInfo(name = "description")
     private String description;
 
+    //TODO: converter for Map
     @ColumnInfo(name = "content")
-    private Map<String, String> content;
+    private String content;
 
     public int getId() {
         return id;
@@ -34,7 +34,7 @@ public abstract class Card implements Serializable {
         return description;
     }
 
-    public Map<String, String> getContent() {
+    public String getContent() {
         return content;
     }
 
@@ -50,7 +50,7 @@ public abstract class Card implements Serializable {
         this.description = description;
     }
 
-    public void setContent(Map<String, String> content) {
+    public void setContent(String content) {
         this.content = content;
     }
 }

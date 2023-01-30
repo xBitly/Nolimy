@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_item_alien_card"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:background="@color/dark_grey_0"
+    android:clickable="false"
+    android:focusable="false"/>
