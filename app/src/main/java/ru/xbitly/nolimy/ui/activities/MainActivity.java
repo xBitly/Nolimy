@@ -10,6 +10,9 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ru.xbitly.nolimy.db.entities.alien.AlienCard;
 import ru.xbitly.nolimy.db.entities.alien.AlienCardGet;
 import ru.xbitly.nolimy.db.entities.alien.AlienCardSave;
@@ -50,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
             AlienCard alienCard = new AlienCard();
             alienCard.setName("Andrey Tester");
             alienCard.setDescription("Tester");
-            alienCard.setContent(null);
+            Map<String, String> map = new HashMap<>();
+            map.put("Number", "+79163918498");
+            map.put("Telegram", "avandarte.t.me");
+            alienCard.setContent(map);
             AlienCardSave alienCardSave = new AlienCardSave(this, alienCard);
             alienCardSave.execute();
 
