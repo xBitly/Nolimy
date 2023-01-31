@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginEnd="15dp"
-            android:layout_toStartOf="@+id/button_search"
+            android:layout_toStartOf="@id/button_qrcode"
             android:background="@drawable/bg_edit_text"
             android:textColorHint="@color/white_30"
             android:textSize="14sp"
@@ -32,13 +32,13 @@
             android:hint="@string/search"/>
 
         <ImageButton
-            android:id="@+id/button_search"
+            android:id="@+id/button_qrcode"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_alignParentEnd="true"
             android:background="@drawable/bg_image_button"
             android:padding="14dp"
-            android:src="@drawable/ic_search" />
+            android:src="@drawable/ic_qrcode" />
     </RelativeLayout>
 
 
@@ -50,29 +50,43 @@
         android:layout_below="@id/relative_top"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="30dp"
         android:scrollbars="none"
         android:overScrollMode="never">
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="0dp">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler"
+            android:layout_height="match_parent">
+            <View
+                android:id="@+id/view_top"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/view_center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                android:background="@color/light_gray"
-                tools:itemCount="5"
-                tools:listitem="@layout/view_alien_card"/>
-        </androidx.cardview.widget.CardView>
+                android:layout_below="@id/view_top"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="0dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:background="@color/light_gray"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/view_alien_card" />
+            </androidx.cardview.widget.CardView>
+            <View
+                android:id="@+id/view_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/view_center"/>
+        </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/relative_top"
+        android:layout_below="@id/relative_top"
         android:layout_marginBottom="0dp"
         android:background="@drawable/bg_gradient_shadow_top" />
 

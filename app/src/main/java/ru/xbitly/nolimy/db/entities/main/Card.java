@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Map;
 
 @Entity
 public abstract class Card implements Serializable {
@@ -18,9 +19,8 @@ public abstract class Card implements Serializable {
     @ColumnInfo(name = "description")
     private String description;
 
-    //TODO: converter for Map
     @ColumnInfo(name = "content")
-    private String content;
+    private Map<String, String> content;
 
     public int getId() {
         return id;
@@ -34,7 +34,7 @@ public abstract class Card implements Serializable {
         return description;
     }
 
-    public String getContent() {
+    public Map<String, String> getContent() {
         return content;
     }
 
@@ -50,7 +50,7 @@ public abstract class Card implements Serializable {
         this.description = description;
     }
 
-    public void setContent(String content) {
+    public void setContent(Map<String, String> content) {
         this.content = content;
     }
 }

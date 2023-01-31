@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         imageButtonRead.setOnClickListener(view -> {
 
             AlienCard alienCard = new AlienCard();
-            alienCard.setName("Testov Test");
+            alienCard.setName("Andrey Tester");
             alienCard.setDescription("Tester");
             alienCard.setContent(null);
             AlienCardSave alienCardSave = new AlienCardSave(this, alienCard);

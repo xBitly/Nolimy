@@ -3,7 +3,6 @@ package ru.xbitly.nolimy.db.entities.alien;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +15,9 @@ public class AlienCardGet extends AsyncTask<Void, Void, List<AlienCard>> {
 
     @SuppressLint("StaticFieldLeak")
     private final Context context;
+    @SuppressLint("StaticFieldLeak")
     private RecyclerView recyclerView;
+    private AlienCardsListAdapter adapter;
 
     public AlienCardGet(Context context){
         this.context = context;
@@ -32,11 +33,15 @@ public class AlienCardGet extends AsyncTask<Void, Void, List<AlienCard>> {
     @Override
     protected void onPostExecute(List<AlienCard> alienCardList) {
         super.onPostExecute(alienCardList);
-        AlienCardsListAdapter adapter = new AlienCardsListAdapter(alienCardList, context);
+        adapter = new AlienCardsListAdapter(alienCardList, context);
         if (recyclerView != null) recyclerView.setAdapter(adapter);
     }
 
     public void setRecyclerView(RecyclerView recyclerView){
         this.recyclerView = recyclerView;
+    }
+
+    public AlienCardsListAdapter getAdapter() {
+        return adapter;
     }
 }
