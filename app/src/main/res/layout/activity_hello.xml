@@ -45,6 +45,7 @@
             android:layout_alignParentEnd="true"
             android:background="@null"
             android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/white_selector"
             android:text="@string/skip"
             android:textSize="16sp"/>
     </RelativeLayout>

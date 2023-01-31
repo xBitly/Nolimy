@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dark_snackbar">
+    <TextView
+        android:id="@+id/text_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="19dp"
+        android:text="@string/deleted"
+        android:fontFamily="@font/montserrat_semibold"/>
+    <Button
+        android:id="@+id/button_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:textColor="@color/blue_selector"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/undo"
+        android:textSize="16sp"/>
+</RelativeLayout>
