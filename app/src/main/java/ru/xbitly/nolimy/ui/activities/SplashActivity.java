@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
@@ -14,8 +13,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         final SharedPreferences settings = getSharedPreferences("settings", MODE_PRIVATE);
         boolean firstStart = settings.getBoolean("first_start", true);
-
-        Log.e("f", String.valueOf(firstStart));
 
         super.onCreate(savedInstanceState);
 

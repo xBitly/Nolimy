@@ -1,4 +1,4 @@
-package ru.xbitly.nolimy.ui.recycler.adapter;
+package ru.xbitly.nolimy.ui.recyclers.adapters;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import ru.xbitly.nolimy.R;
-import ru.xbitly.nolimy.ui.recycler.holder.CardContentRecyclerViewHolder;
+import ru.xbitly.nolimy.ui.recyclers.holders.CardContentRecyclerViewHolder;
 
 public class CardContentListAdapter extends RecyclerView.Adapter<CardContentRecyclerViewHolder> {
 

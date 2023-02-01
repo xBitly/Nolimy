@@ -1,4 +1,4 @@
-package ru.xbitly.nolimy.ui.recycler.holder;
+package ru.xbitly.nolimy.ui.recyclers.holders;
 
 import android.view.View;
 import android.widget.RelativeLayout;

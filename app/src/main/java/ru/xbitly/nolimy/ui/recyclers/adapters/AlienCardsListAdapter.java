@@ -1,4 +1,4 @@
-package ru.xbitly.nolimy.ui.recycler.adapter;
+package ru.xbitly.nolimy.ui.recyclers.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -19,7 +19,7 @@ import java.util.List;
 
 import ru.xbitly.nolimy.R;
 import ru.xbitly.nolimy.db.entities.alien.AlienCard;
-import ru.xbitly.nolimy.ui.recycler.holder.AlienCardsRecyclerViewHolder;
+import ru.xbitly.nolimy.ui.recyclers.holders.AlienCardsRecyclerViewHolder;
 
 public class AlienCardsListAdapter extends RecyclerView.Adapter<AlienCardsRecyclerViewHolder> {
 
@@ -117,7 +117,7 @@ public class AlienCardsListAdapter extends RecyclerView.Adapter<AlienCardsRecycl
 
         @SuppressLint("UseCompatLoadingForDrawables")
         Drawable back = context.getDrawable(R.drawable.bg_light_gray);
-        InsetDrawable inset = new InsetDrawable(back, context.getResources().getDimensionPixelSize(R.dimen.horizontal_margin) - 32);
+        InsetDrawable inset = new InsetDrawable(back, context.getResources().getDimensionPixelSize(R.dimen.center_margin));
         alert.getWindow().setBackgroundDrawable(inset);
         alert.show();
     }

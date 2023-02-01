@@ -3,8 +3,9 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
-    <color name="dark_grey">#070707</color>
-    <color name="light_gray">#141414</color>
+    <color name="dark_grey">#0D0D0E</color>
+    <color name="light_gray">#17171A</color>
+    <color name="sun_gray">#282828</color>
 
     <color name="white_30">#4DFFFFFF</color>
     <color name="white_10">#1AFFFFFF</color>

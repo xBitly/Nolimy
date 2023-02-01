@@ -31,7 +31,7 @@ import ru.xbitly.nolimy.db.entities.alien.AlienCard;
 import ru.xbitly.nolimy.db.entities.alien.AlienCardDelete;
 import ru.xbitly.nolimy.db.entities.alien.AlienCardGet;
 import ru.xbitly.nolimy.ui.elements.NolimySnackbar;
-import ru.xbitly.nolimy.ui.recycler.adapter.AlienCardsListAdapter;
+import ru.xbitly.nolimy.ui.recyclers.adapters.AlienCardsListAdapter;
 
 public class UsersFragment extends Fragment {
 
@@ -186,7 +186,7 @@ public class UsersFragment extends Fragment {
         ClipData clip = ClipData.newPlainText("Nolimy profile", text);
         clipboard.setPrimaryClip(clip);
         NolimySnackbar nolimySnackbar = new NolimySnackbar();
-        nolimySnackbar.createInfoSnackbar(context, requireView());
+        nolimySnackbar.createSuccessSnackbar(context, requireView());
         nolimySnackbar.getTextInfo().setText(getText(R.string.copied));
         nolimySnackbar.show();
     }

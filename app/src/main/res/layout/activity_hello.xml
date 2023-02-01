@@ -16,16 +16,14 @@
     <Button
         android:id="@+id/button_continue"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="64dp"
         android:layout_above="@+id/relative_bottom"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/vertical_margin"
         android:background="@drawable/bg_gradient_button"
         android:fontFamily="@font/montserrat_semibold"
         android:paddingStart="60dp"
-        android:paddingTop="20dp"
         android:paddingEnd="60dp"
-        android:paddingBottom="20dp"
         android:text="@string/t_continue"
         android:textSize="@dimen/title_size" />
 

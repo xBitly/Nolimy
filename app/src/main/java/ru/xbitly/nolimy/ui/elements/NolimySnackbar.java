@@ -37,13 +37,15 @@ public class NolimySnackbar {
     }
 
     @SuppressLint("InflateParams")
-    public void createInfoSnackbar(Context context, View view){
+    public void createSuccessSnackbar(Context context, View view){
         this.context = context;
         this.snackbar = Snackbar.make(view, "", Snackbar.LENGTH_SHORT);
         layout = (Snackbar.SnackbarLayout) snackbar.getView();
 
-        snackView = LayoutInflater.from(context).inflate(R.layout.view_info_snackbar, null);
+        snackView = LayoutInflater.from(context).inflate(R.layout.view_success_snackbar, null);
         textInfo = snackView.findViewById(R.id.text_info);
+
+        getSnackView().setOnClickListener(view1 -> dismiss());
     }
 
     public void addSnackbarCallback(Snackbar.Callback callback){
@@ -69,7 +71,7 @@ public class NolimySnackbar {
     public void show(){
         layout.addView(snackView, 0);
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) snackbar.getView().getLayoutParams();
-        params.setMargins(context.getResources().getDimensionPixelOffset(R.dimen.horizontal_margin) - 32, 0, context.getResources().getDimensionPixelOffset(R.dimen.horizontal_margin) - 32, context.getResources().getDimensionPixelOffset(R.dimen.vertical_margin) + 2);
+        params.setMargins(context.getResources().getDimensionPixelOffset(R.dimen.center_margin) , context.getResources().getDimensionPixelOffset(R.dimen.center_margin), context.getResources().getDimensionPixelOffset(R.dimen.center_margin), context.getResources().getDimensionPixelOffset(R.dimen.horizontal_margin));
         snackbar.getView().setLayoutParams(params);
         snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
         snackbar.show();

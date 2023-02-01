@@ -58,7 +58,8 @@
             <View
                 android:id="@+id/view_top"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/vertical_margin"/>
+                android:layout_height="@dimen/vertical_margin"
+                android:background="@drawable/bg_gradient_shadow_bottom"/>
             <androidx.cardview.widget.CardView
                 android:id="@+id/view_center"
                 android:layout_width="match_parent"

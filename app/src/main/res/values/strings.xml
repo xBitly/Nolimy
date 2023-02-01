@@ -14,4 +14,7 @@
     <string name="deleted">Deleted</string>
     <string name="undo">UNDO</string>
     <string name="copied">Copied</string>
+    <string name="save">Save</string>
+    <string name="saved">Saved</string>
+    <string name="text_read">You can scan a new card by attaching it to the back cover of your phone</string>
 </resources>
