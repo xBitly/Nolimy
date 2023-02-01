@@ -18,8 +18,8 @@ public class AlienCard extends Card {
     public String toString() {
         StringBuilder result = new StringBuilder(getName() + "\n" + getDescription() + "\n\n");
         if(getContent() == null || getContent().entrySet().isEmpty()) return result.toString();
+        List<Map.Entry<String, String>> entryList = new ArrayList<>(getContent().entrySet());
         for(int i = getContent().entrySet().size() - 1; i >= 0; i--) {
-            List<Map.Entry<String, String>> entryList = new ArrayList<>(getContent().entrySet());
             Map.Entry<String, String> entry = entryList.get(i);
             result.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
         }

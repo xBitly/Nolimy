@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.xbitly.nolimy.db.system.DatabaseClient;
-import ru.xbitly.nolimy.ui.recycler.AlienCardsListAdapter;
+import ru.xbitly.nolimy.ui.recycler.adapter.AlienCardsListAdapter;
 
 public class AlienCardGet extends AsyncTask<Void, Void, List<AlienCard>> {
 

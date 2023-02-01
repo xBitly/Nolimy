@@ -10,25 +10,25 @@
         android:id="@+id/relative_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="30dp"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp">
+        android:paddingTop="@dimen/horizontal_margin"
+        android:paddingStart="@dimen/vertical_margin"
+        android:paddingEnd="@dimen/horizontal_margin">
 
         <EditText
             android:id="@+id/edit_text_search"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="@dimen/center_margin"
             android:layout_toStartOf="@id/button_qrcode"
             android:background="@drawable/bg_edit_text"
             android:textColorHint="@color/white_30"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_size"
             android:singleLine="true"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white_30"
             android:textCursorDrawable="@drawable/bg_cursor"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
+            android:paddingStart="@dimen/item_horizontal_margin"
+            android:paddingEnd="@dimen/item_horizontal_margin"
             android:hint="@string/search"/>
 
         <ImageButton
@@ -48,8 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/relative_top"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin"
         android:scrollbars="none"
         android:overScrollMode="never">
         <RelativeLayout
@@ -58,13 +58,13 @@
             <View
                 android:id="@+id/view_top"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"/>
+                android:layout_height="@dimen/vertical_margin"/>
             <androidx.cardview.widget.CardView
                 android:id="@+id/view_center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/view_top"
-                app:cardCornerRadius="30dp"
+                app:cardCornerRadius="@dimen/corner_radius"
                 app:cardElevation="0dp">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler"
@@ -78,16 +78,8 @@
             <View
                 android:id="@+id/view_bottom"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/vertical_margin"
                 android:layout_below="@id/view_center"/>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@id/relative_top"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/bg_gradient_shadow_top" />
-
 </RelativeLayout>

@@ -4,10 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
@@ -17,10 +15,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -31,18 +26,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Objects;
-
 import ru.xbitly.nolimy.R;
 import ru.xbitly.nolimy.db.entities.alien.AlienCard;
 import ru.xbitly.nolimy.db.entities.alien.AlienCardDelete;
 import ru.xbitly.nolimy.db.entities.alien.AlienCardGet;
-import ru.xbitly.nolimy.ui.recycler.AlienCardsListAdapter;
+import ru.xbitly.nolimy.ui.elements.NolimySnackbar;
+import ru.xbitly.nolimy.ui.recycler.adapter.AlienCardsListAdapter;
 
 public class UsersFragment extends Fragment {
 
     private final Context context;
     private AlienCardGet alienCardGet;
+    private AlienCardsListAdapter adapter;
+    private AlienCard alienCard;
+
+    private boolean snackbarIsDismissed = false;
 
     public UsersFragment(Context context) {
         this.context = context;
@@ -105,12 +103,22 @@ public class UsersFragment extends Fragment {
             if(alienCardGet.getAdapter() == null) return;
 
             int position = viewHolder.getAdapterPosition();
-            final AlienCardsListAdapter adapter = alienCardGet.getAdapter();
-            final AlienCard alienCard = adapter.getAlienCards().get(position);
+            adapter = alienCardGet.getAdapter();
+            alienCard = adapter.getAlienCards().get(position);
 
             if (direction == ItemTouchHelper.LEFT){
                 adapter.removeItem(position);
-                createDeletedSnackbar(adapter, alienCard, position);
+                NolimySnackbar nolimySnackbar = new NolimySnackbar();
+                nolimySnackbar.createActionSnackbar(context, requireView());
+                nolimySnackbar.getButtonAction().setOnClickListener(v -> {
+                    if(!snackbarIsDismissed) adapter.restoreItem(alienCard, position);
+                    snackbarIsDismissed = true;
+                    nolimySnackbar.dismiss();
+                });
+                nolimySnackbar.getTextAction().setText(getText(R.string.deleted));
+                nolimySnackbar.getButtonAction().setText(getText(R.string.undo));
+                nolimySnackbar.show();
+                nolimySnackbar.addSnackbarCallback(snackbarCallback);
             } else {
                 copyToClipBoard(alienCard.toString());
                 adapter.notifyDataSetChanged();
@@ -155,52 +163,31 @@ public class UsersFragment extends Fragment {
             }
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
+    };
 
-        private void copyToClipBoard(String text) {
-            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Nolimy profile", text);
-            clipboard.setPrimaryClip(clip);
+    private final Snackbar.Callback snackbarCallback = new Snackbar.Callback() {
+        @Override
+        public void onDismissed(Snackbar snackbar, int event) {
+            if(adapter == null || alienCard == null) return;
+            if (!adapter.itemIsRestored()){
+                AlienCardDelete alienCardDelete = new AlienCardDelete(context, alienCard);
+                alienCardDelete.execute();
+            }
+            snackbarIsDismissed = false;
         }
 
-        private void createDeletedSnackbar(AlienCardsListAdapter adapter, AlienCard alienCard, int deletedPosition){
-            Snackbar snackbar = Snackbar.make(requireView(), "", Snackbar.LENGTH_LONG);
-
-            Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbar.getView();
-
-            @SuppressLint("InflateParams")
-            View snackView = LayoutInflater.from(context).inflate(R.layout.view_action_snackbar, null);
-            Button buttonUndo = snackView.findViewById(R.id.button_action);
-
-            buttonUndo.setOnClickListener(v -> {
-                adapter.restoreItem(alienCard, deletedPosition);
-                snackbar.dismiss();
-            });
-
-            layout.addView(snackView, 0);
-            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) snackbar.getView().getLayoutParams();
-            params.setMargins(dpToPx(19), dpToPx(0), dpToPx(19), dpToPx(30));
-            snackbar.getView().setLayoutParams(params);
-            snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
-            snackbar.show();
-
-            snackbar.addCallback(new Snackbar.Callback() {
-                @Override
-                public void onDismissed(Snackbar snackbar, int event) {
-                    if (!adapter.itemIsRestored()){
-                        AlienCardDelete alienCardDelete = new AlienCardDelete(context, alienCard);
-                        alienCardDelete.execute();
-                    }
-                }
-
-                @Override
-                public void onShown(Snackbar snackbar) {
-                }
-            });
-        }
-
-        private int dpToPx(int dp) {
-            context.getResources();
-            return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+        @Override
+        public void onShown(Snackbar snackbar) {
         }
     };
+
+    private void copyToClipBoard(String text) {
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Nolimy profile", text);
+        clipboard.setPrimaryClip(clip);
+        NolimySnackbar nolimySnackbar = new NolimySnackbar();
+        nolimySnackbar.createInfoSnackbar(context, requireView());
+        nolimySnackbar.getTextInfo().setText(getText(R.string.copied));
+        nolimySnackbar.show();
+    }
 }

@@ -1,8 +1,6 @@
 package ru.xbitly.nolimy.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;

@@ -9,7 +9,9 @@
         android:id="@+id/relative_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="30dp">
+        android:paddingStart="@dimen/horizontal_margin"
+        android:paddingEnd="@dimen/horizontal_margin"
+        android:paddingTop="@dimen/vertical_margin">
         <ImageButton
             android:id="@+id/button_qrcode"
             android:layout_width="45dp"
@@ -22,7 +24,7 @@
             android:id="@+id/button_edit"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="@dimen/center_margin"
             android:layout_toStartOf="@+id/button_create"
             android:background="@drawable/bg_image_button"
             android:padding="14dp"

@@ -2,19 +2,14 @@ package ru.xbitly.nolimy.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import ru.xbitly.nolimy.db.entities.alien.AlienCard;
-import ru.xbitly.nolimy.db.entities.alien.AlienCardGet;
 import ru.xbitly.nolimy.db.entities.alien.AlienCardSave;
 import ru.xbitly.nolimy.ui.fragments.ProfileFragment;
 import ru.xbitly.nolimy.ui.fragments.UsersFragment;

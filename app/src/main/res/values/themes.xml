@@ -1,5 +1,6 @@
 <resources>
     <style name="Theme.Nolimy" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--color-->
         <item name="colorAccent">@color/light_gray</item>
         <!--screen-->
         <item name="android:windowFullscreen">false</item>
