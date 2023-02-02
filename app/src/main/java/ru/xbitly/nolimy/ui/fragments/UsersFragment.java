@@ -44,6 +44,7 @@ public class UsersFragment extends Fragment {
     private AlienCardsListAdapter adapter;
     private AlienCard alienCard;
     private NfcAdapter nfcAdapter;
+    private TextView textViewNoCards;
 
     private boolean snackbarIsDismissed = false;
 
@@ -65,12 +66,12 @@ public class UsersFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
         EditText editTextSearch = view.findViewById(R.id.edit_text_search);
-        TextView textViewNoCards = view.findViewById(R.id.text_no_cards);
+        textViewNoCards = view.findViewById(R.id.text_no_cards);
         ImageButton imageButton =  view.findViewById(R.id.button_qrcode);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new AlienCardsListAdapter(null, context));
+        recyclerView.setAdapter(new AlienCardsListAdapter(null, context, textViewNoCards));
         recyclerView.setNestedScrollingEnabled(false);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
@@ -200,7 +201,7 @@ public class UsersFragment extends Fragment {
         clipboard.setPrimaryClip(clip);
         NolimySnackbar nolimySnackbar = new NolimySnackbar();
         nolimySnackbar.createSuccessSnackbar(context, requireView());
-        nolimySnackbar.getTextInfo().setText(getText(R.string.copied));
+        nolimySnackbar.getTextSuccess().setText(getText(R.string.copied));
         nolimySnackbar.show();
     }
 }

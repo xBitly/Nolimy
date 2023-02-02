@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ru.xbitly.nolimy.db.entities.alien.AlienCard;
+import ru.xbitly.nolimy.ui.elements.NolimySnackbar;
 import ru.xbitly.nolimy.ui.fragments.ProfileFragment;
 import ru.xbitly.nolimy.ui.fragments.UsersFragment;
 import ru.xbitly.nolimy.R;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
-        ProfileFragment profileFragment = new ProfileFragment();
+        ProfileFragment profileFragment = new ProfileFragment(this);
         UsersFragment usersFragment = new UsersFragment(this);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -58,13 +59,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         imageButtonRead.setOnClickListener(view -> {
-            if (nfcAdapter != null) {
-                Intent intent = new Intent(MainActivity.this, ReadActivity.class);
-                startActivity(intent);
-                //TODO: anim
-                overridePendingTransition(0, 0);
-                finish();
+            if (nfcAdapter == null) return;
+            if (!nfcAdapter.isEnabled()){
+                NolimySnackbar snackbar = new NolimySnackbar();
+                snackbar.createInfoSnackbar(this, view);
+                snackbar.getTextInfo().setText(getText(R.string.nfc_disabled));
+                snackbar.show();
+                return;
             }
+            Intent intent = new Intent(MainActivity.this, ReadActivity.class);
+            startActivity(intent);
+            //TODO: anim
+            overridePendingTransition(0, 0);
+            finish();
+
         });
     }
 }

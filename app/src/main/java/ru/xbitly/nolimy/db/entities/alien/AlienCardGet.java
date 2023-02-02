@@ -40,10 +40,8 @@ public class AlienCardGet extends AsyncTask<Void, Void, List<AlienCard>> {
     @Override
     protected void onPostExecute(List<AlienCard> alienCardList) {
         super.onPostExecute(alienCardList);
-        adapter = new AlienCardsListAdapter(alienCardList, context);
+        adapter = new AlienCardsListAdapter(alienCardList, context, textView);
         if (recyclerView != null) recyclerView.setAdapter(adapter);
-        if (adapter.getItemCount() == 0) textView.setVisibility(View.VISIBLE);
-        else textView.setVisibility(View.GONE);
     }
 
     public void setRecyclerView(RecyclerView recyclerView){

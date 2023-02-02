@@ -26,12 +26,16 @@ public class AlienCardsListAdapter extends RecyclerView.Adapter<AlienCardsRecycl
     private List<AlienCard> alienCards;
     private final List<AlienCard> alienCardsFinal;
     private final Context context;
+    private final TextView textView;
     private boolean restored = false;
 
-    public AlienCardsListAdapter(List<AlienCard> alienCards, Context context) {
+    public AlienCardsListAdapter(List<AlienCard> alienCards, Context context, TextView textView) {
         this.alienCards = alienCards;
         this.context = context;
         this.alienCardsFinal = alienCards;
+        this.textView = textView;
+        if (getItemCount() == 0) textView.setVisibility(View.VISIBLE);
+        else textView.setVisibility(View.GONE);
     }
 
     @Override
@@ -80,6 +84,8 @@ public class AlienCardsListAdapter extends RecyclerView.Adapter<AlienCardsRecycl
         this.alienCards.remove(position);
         notifyDataSetChanged();
         restored = false;
+        if (getItemCount() == 0) textView.setVisibility(View.VISIBLE);
+        else textView.setVisibility(View.GONE);
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -87,6 +93,8 @@ public class AlienCardsListAdapter extends RecyclerView.Adapter<AlienCardsRecycl
         this.alienCards.add(position, alienCard);
         notifyDataSetChanged();
         restored = true;
+        if (getItemCount() == 0) textView.setVisibility(View.VISIBLE);
+        else textView.setVisibility(View.GONE);
     }
 
     public boolean itemIsRestored(){

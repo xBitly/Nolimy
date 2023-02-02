@@ -4,9 +4,9 @@
     android:id="@+id/view_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_blue_snackbar">
+    android:background="@drawable/bg_dark_snackbar">
     <TextView
-        android:id="@+id/text_success"
+        android:id="@+id/text_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/title_size"

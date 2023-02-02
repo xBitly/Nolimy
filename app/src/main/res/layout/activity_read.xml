@@ -28,7 +28,7 @@
             android:layout_height="45dp"
             android:layout_alignParentEnd="true"
             android:background="@drawable/bg_image_button"
-            android:text="Support"
+            android:text="@string/support"
             android:paddingStart="@dimen/horizontal_margin"
             android:paddingEnd="@dimen/horizontal_margin"
             android:textColor="@color/white_30"
@@ -117,6 +117,8 @@
         android:src="@drawable/ic_card_scan_phone"
         android:layout_below="@id/relative_top"
         android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin"
         android:layout_marginBottom="@dimen/center_margin"
         android:layout_above="@id/text_reading"/>
     <TextView

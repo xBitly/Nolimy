@@ -18,6 +18,7 @@ public class NolimySnackbar {
     private Context context;
     private Snackbar snackbar;
     private Button buttonAction;
+    private TextView textSuccess;
     private TextView textInfo;
     private TextView textAction;
     private View snackView;
@@ -43,6 +44,18 @@ public class NolimySnackbar {
         layout = (Snackbar.SnackbarLayout) snackbar.getView();
 
         snackView = LayoutInflater.from(context).inflate(R.layout.view_success_snackbar, null);
+        textSuccess = snackView.findViewById(R.id.text_success);
+
+        getSnackView().setOnClickListener(view1 -> dismiss());
+    }
+
+    @SuppressLint("InflateParams")
+    public void createInfoSnackbar(Context context, View view){
+        this.context = context;
+        this.snackbar = Snackbar.make(view, "", Snackbar.LENGTH_SHORT);
+        layout = (Snackbar.SnackbarLayout) snackbar.getView();
+
+        snackView = LayoutInflater.from(context).inflate(R.layout.view_info_snackbar, null);
         textInfo = snackView.findViewById(R.id.text_info);
 
         getSnackView().setOnClickListener(view1 -> dismiss());
@@ -62,6 +75,10 @@ public class NolimySnackbar {
 
     public View getSnackView(){
         return snackView;
+    }
+
+    public TextView getTextSuccess(){
+        return textSuccess;
     }
 
     public TextView getTextInfo(){

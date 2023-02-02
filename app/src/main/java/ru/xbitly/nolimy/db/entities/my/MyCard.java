@@ -8,15 +8,14 @@ import ru.xbitly.nolimy.db.entities.main.Card;
 @Entity
 public class MyCard extends Card {
 
-    //TODO: converter for drawable
     @ColumnInfo(name = "background")
-    private String background;
+    private int background;
 
-    public String getBackground() {
+    public int getBackground() {
         return background;
     }
 
-    public void setBackground(String background) {
+    public void setBackground(int background) {
         this.background = background;
     }
 }

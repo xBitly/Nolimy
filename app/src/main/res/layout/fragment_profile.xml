@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/dark_grey">
 
     <RelativeLayout
@@ -38,6 +38,104 @@
             android:background="@drawable/bg_image_button"
             android:padding="14dp"
             android:src="@drawable/ic_add" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relative_top"
+        android:layout_marginTop="@dimen/vertical_margin">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"/>
+    </RelativeLayout>
+
+<!--    TODO: Scroll view-->
+    <RelativeLayout
+        android:id="@+id/relative_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@drawable/bg_light_gray"
+        android:layout_below="@id/relative_center"
+        android:layout_marginTop="@dimen/center_margin"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin">
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Andrey Avdeev"
+            android:textSize="@dimen/title_size"
+            android:fontFamily="@font/montserrat_semibold"
+            android:singleLine="true"
+            android:layout_marginStart="@dimen/item_horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_margin"
+            android:layout_marginEnd="@dimen/item_horizontal_margin"/>
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="SEO and developer"
+            android:textSize="@dimen/text_size"
+            android:singleLine="true"
+            android:layout_below="@id/text_name"
+            android:layout_marginStart="@dimen/item_horizontal_margin"
+            android:layout_marginTop="@dimen/center_margin"
+            android:layout_marginEnd="@dimen/item_horizontal_margin"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_description"
+            android:layout_marginBottom="@dimen/vertical_margin"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            android:overScrollMode="never"
+            android:background="@color/light_gray"
+            tools:itemCount="3"
+            tools:listitem="@layout/view_card_content" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_write"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/bg_image_button"
+        android:visibility="gone"
+        android:text="@string/write"
+        android:layout_below="@id/relative_bottom"
+        android:layout_marginTop="@dimen/center_margin"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:textColor="@color/white_30"
+        android:fontFamily="@font/montserrat_semibold"/>
+
+    <RelativeLayout
+        android:id="@+id/relative_no_cards"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="visible"
+        android:layout_below="@id/relative_top"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin">
+        <ImageView
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_no_card"/>
+        <TextView
+            android:id="@+id/text_no_cards"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/no_cards"
+            android:gravity="center"
+            android:textColor="@color/white_30"
+            android:textSize="@dimen/little_text_size" />
     </RelativeLayout>
 
 </RelativeLayout>

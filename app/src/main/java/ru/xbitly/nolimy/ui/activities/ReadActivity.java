@@ -17,6 +17,7 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -157,7 +158,7 @@ public class ReadActivity extends AppCompatActivity {
 
                     NolimySnackbar nolimySnackbar = new NolimySnackbar();
                     nolimySnackbar.createSuccessSnackbar(context, view);
-                    nolimySnackbar.getTextInfo().setText(context.getText(R.string.saved));
+                    nolimySnackbar.getTextSuccess().setText(context.getText(R.string.saved));
                     nolimySnackbar.show();
 
                     setCardInvisible();

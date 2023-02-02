@@ -19,4 +19,7 @@
     <string name="text_read">You can scan a new card by attaching it to the back cover of your phone</string>
     <string name="text_reading">Attach the card to the back cover of the phone</string>
     <string name="no_cards">No cards any yet</string>
+    <string name="nfc_disabled">NFC is disabled</string>
+    <string name="write">Write</string>
+    <string name="support">Support</string>
 </resources>
