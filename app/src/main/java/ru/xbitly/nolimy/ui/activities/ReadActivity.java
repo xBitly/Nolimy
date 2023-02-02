@@ -20,10 +20,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+
+import org.w3c.dom.Text;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -44,6 +47,8 @@ public class ReadActivity extends AppCompatActivity {
     private TextView textViewName;
     private TextView textViewDescription;
     private TextView textViewRead;
+    private TextView textViewReading;
+    private ImageView imageViewReading;
     private RecyclerView recyclerView;
     private Button buttonSave;
 
@@ -59,6 +64,8 @@ public class ReadActivity extends AppCompatActivity {
 
         relativeLayout = findViewById(R.id.relative_center);
         textViewRead = findViewById(R.id.text_read);
+        textViewReading = findViewById(R.id.text_reading);
+        imageViewReading = findViewById(R.id.image_reading);
         textViewName = findViewById(R.id.text_name);
         buttonSave = findViewById(R.id.button_save);
         textViewDescription = findViewById(R.id.text_description);
@@ -92,10 +99,14 @@ public class ReadActivity extends AppCompatActivity {
         private final Context context;
         @SuppressLint("StaticFieldLeak")
         private final View view;
+        @SuppressLint("StaticFieldLeak")
+        private final TextView textViewReading;
+        @SuppressLint("StaticFieldLeak")
+        private final ImageView imageViewReading;
 
         public NdefReader(RelativeLayout relativeLayout, TextView textViewRead, Button buttonSave,
                           RecyclerView recyclerView, TextView textViewName, TextView textViewDescription,
-                          Context context, View view){
+                          Context context, View view, TextView textViewReading, ImageView imageViewReading){
             this.relativeLayout = relativeLayout;
             this.textViewRead = textViewRead;
             this.buttonSave = buttonSave;
@@ -104,6 +115,8 @@ public class ReadActivity extends AppCompatActivity {
             this.textViewDescription = textViewDescription;
             this.context = context;
             this.view = view;
+            this.imageViewReading = imageViewReading;
+            this.textViewReading = textViewReading;
         }
 
         @Override
@@ -146,6 +159,8 @@ public class ReadActivity extends AppCompatActivity {
                     nolimySnackbar.createSuccessSnackbar(context, view);
                     nolimySnackbar.getTextInfo().setText(context.getText(R.string.saved));
                     nolimySnackbar.show();
+
+                    setCardInvisible();
                 });
             }
         }
@@ -154,6 +169,16 @@ public class ReadActivity extends AppCompatActivity {
             relativeLayout.setVisibility(View.VISIBLE);
             textViewRead.setVisibility(View.VISIBLE);
             buttonSave.setVisibility(View.VISIBLE);
+            textViewReading.setVisibility(View.GONE);
+            imageViewReading.setVisibility(View.GONE);
+        }
+
+        public void setCardInvisible(){
+            relativeLayout.setVisibility(View.GONE);
+            textViewRead.setVisibility(View.GONE);
+            buttonSave.setVisibility(View.GONE);
+            textViewReading.setVisibility(View.VISIBLE);
+            imageViewReading.setVisibility(View.VISIBLE);
         }
 
         public void setCardFields(AlienCard alienCard){
@@ -187,7 +212,7 @@ public class ReadActivity extends AppCompatActivity {
             String type = intent.getType();
             if (MIME_TEXT_PLAIN.equals(type)) {
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                new NdefReader(relativeLayout, textViewRead, buttonSave, recyclerView, textViewName, textViewDescription, this, relative).execute(tag);
+                new NdefReader(relativeLayout, textViewRead, buttonSave, recyclerView, textViewName, textViewDescription, this, relative, textViewReading, imageViewReading).execute(tag);
             }
         } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -196,7 +221,7 @@ public class ReadActivity extends AppCompatActivity {
 
             for (String tech : techList) {
                 if (searchedTech.equals(tech)) {
-                    new NdefReader(relativeLayout, textViewRead, buttonSave, recyclerView, textViewName, textViewDescription, this, relative).execute(tag);
+                    new NdefReader(relativeLayout, textViewRead, buttonSave, recyclerView, textViewName, textViewDescription, this, relative, textViewReading, imageViewReading).execute(tag);
                     break;
                 }
             }

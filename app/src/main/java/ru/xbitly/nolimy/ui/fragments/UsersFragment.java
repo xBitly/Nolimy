@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +17,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -39,6 +43,7 @@ public class UsersFragment extends Fragment {
     private AlienCardGet alienCardGet;
     private AlienCardsListAdapter adapter;
     private AlienCard alienCard;
+    private NfcAdapter nfcAdapter;
 
     private boolean snackbarIsDismissed = false;
 
@@ -56,8 +61,12 @@ public class UsersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        nfcAdapter = NfcAdapter.getDefaultAdapter(context);
+
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
         EditText editTextSearch = view.findViewById(R.id.edit_text_search);
+        TextView textViewNoCards = view.findViewById(R.id.text_no_cards);
+        ImageButton imageButton =  view.findViewById(R.id.button_qrcode);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -67,11 +76,15 @@ public class UsersFragment extends Fragment {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-        alienCardGet = new AlienCardGet(context);
+        alienCardGet = new AlienCardGet(context, textViewNoCards);
         alienCardGet.setRecyclerView(recyclerView);
         alienCardGet.execute();
 
         editTextSearch.addTextChangedListener(editTextSearchWatcher);
+
+        if (nfcAdapter == null){
+            imageButton.setVisibility(View.GONE);
+        }
     }
 
     private final TextWatcher editTextSearchWatcher = new TextWatcher() {

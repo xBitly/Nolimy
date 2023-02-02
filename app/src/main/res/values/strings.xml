@@ -17,4 +17,6 @@
     <string name="save">Save</string>
     <string name="saved">Saved</string>
     <string name="text_read">You can scan a new card by attaching it to the back cover of your phone</string>
+    <string name="text_reading">Attach the card to the back cover of the phone</string>
+    <string name="no_cards">No cards any yet</string>
 </resources>
