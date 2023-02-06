@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -14,6 +15,7 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
@@ -38,17 +40,20 @@ public class WriteActivity extends AppCompatActivity {
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
         ImageButton buttonBack = findViewById(R.id.button_back);
+        Button buttonSupport = findViewById(R.id.button_support);
 
         json = getIntent().getStringExtra("json");
 
         relativeLayout = findViewById(R.id.relative);
 
-        buttonBack.setOnClickListener(view -> {
-            Intent intent = new Intent(WriteActivity.this, MainActivity.class);
+        buttonBack.setOnClickListener(view -> onBackPressed());
+
+        buttonSupport.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+            intent.putExtra(Intent.EXTRA_EMAIL, "nolimy.dev@gmail.com");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Nolimy Appeal");
             startActivity(intent);
-            //TODO: anim
-            overridePendingTransition(0, 0);
-            finish();
         });
     }
 
@@ -57,12 +62,11 @@ public class WriteActivity extends AppCompatActivity {
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             NolimySnackbar nolimySnackbar = new NolimySnackbar();
-            try{
-                writeTag(tag, createTextMessage(json));
+            if(writeTag(tag, createTextMessage(json))){
                 nolimySnackbar.createSuccessSnackbar(this, relativeLayout);
                 nolimySnackbar.getTextSuccess().setText(getText(R.string.success));
                 nolimySnackbar.show();
-            } catch (Exception e){
+            } else {
                 nolimySnackbar.createErrorSnackbar(this, relativeLayout);
                 nolimySnackbar.getTextError().setText(getText(R.string.error));
                 nolimySnackbar.show();
@@ -122,7 +126,7 @@ public class WriteActivity extends AppCompatActivity {
         return null;
     }
 
-    public void writeTag(Tag tag, NdefMessage message)  {
+    public boolean writeTag(Tag tag, NdefMessage message)  {
         if (tag != null) {
             try {
                 Ndef ndefTag = Ndef.get(tag);
@@ -132,17 +136,21 @@ public class WriteActivity extends AppCompatActivity {
                         nForm.connect();
                         nForm.format(message);
                         nForm.close();
+                        return true;
                     }
                 }
                 else {
                     ndefTag.connect();
                     ndefTag.writeNdefMessage(message);
                     ndefTag.close();
+                    return true;
                 }
             }
             catch(Exception e) {
                 e.printStackTrace();
+                return false;
             }
         }
+        return false;
     }
 }

@@ -28,5 +28,7 @@
         android:textColor="@color/white_selector"
         android:textSize="@dimen/text_size"
         android:linksClickable="true"
-        tools:text="+7 987 654 3210" />
+        android:autoLink="all"
+        android:textColorLink="@color/white"
+        tools:text="+7 987 6593930" />
 </LinearLayout>

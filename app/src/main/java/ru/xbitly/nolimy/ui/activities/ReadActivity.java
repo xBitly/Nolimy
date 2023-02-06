@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
@@ -50,6 +51,7 @@ public class ReadActivity extends AppCompatActivity {
         imageViewReading = findViewById(R.id.image_reading);
         textViewName = findViewById(R.id.text_name);
         buttonSave = findViewById(R.id.button_save);
+        Button buttonSupport = findViewById(R.id.button_support);
         textViewDescription = findViewById(R.id.text_description);
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
@@ -61,6 +63,14 @@ public class ReadActivity extends AppCompatActivity {
             //TODO: anim
             overridePendingTransition(0, 0);
             finish();
+        });
+
+        buttonSupport.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, "nolimy.dev@gmail.com");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Nolimy Appeal");
+            startActivity(intent);
         });
     }
 
