@@ -54,8 +54,7 @@ public class AlienCardsListAdapter extends RecyclerView.Adapter<AlienCardsRecycl
     public void onBindViewHolder(@NonNull AlienCardsRecyclerViewHolder holder, int position) {
         holder.getTextName().setText(alienCards.get(position).getName());
         holder.getTextDescription().setText(alienCards.get(position).getDescription());
-        if (position == getItemCount() - 1)
-            holder.getViewLine().setVisibility(View.INVISIBLE);
+        if (position == 0) holder.getViewLine().setVisibility(View.INVISIBLE);
         else holder.getViewLine().setVisibility(View.VISIBLE);
 
         holder.getViewItem().setOnClickListener(view -> createAlienCardAlertDialog(alienCards.get(position)));

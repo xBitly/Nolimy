@@ -5,16 +5,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.Settings;
 import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.Gson;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import ru.xbitly.nolimy.db.entities.alien.AlienCard;
 import ru.xbitly.nolimy.ui.elements.NolimySnackbar;
 import ru.xbitly.nolimy.ui.fragments.ProfileFragment;
 import ru.xbitly.nolimy.ui.fragments.UsersFragment;
@@ -59,12 +53,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         imageButtonRead.setOnClickListener(view -> {
-            if (nfcAdapter == null) return;
+            if (!nfcIsSupported) return;
             if (!nfcAdapter.isEnabled()){
                 NolimySnackbar snackbar = new NolimySnackbar();
                 snackbar.createInfoSnackbar(this, view);
                 snackbar.getTextInfo().setText(getText(R.string.nfc_disabled));
                 snackbar.show();
+                startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
                 return;
             }
             Intent intent = new Intent(MainActivity.this, ReadActivity.class);

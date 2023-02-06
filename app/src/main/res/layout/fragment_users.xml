@@ -57,13 +57,14 @@
             <View
                 android:id="@+id/view_top"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/vertical_margin"
-                android:background="@drawable/bg_gradient_shadow_bottom"/>
+                android:layout_height="@dimen/vertical_margin"/>
             <androidx.cardview.widget.CardView
                 android:id="@+id/view_center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/view_top"
+                android:background="@color/light_gray"
+                app:cardBackgroundColor="@color/light_gray"
                 app:cardCornerRadius="@dimen/corner_radius"
                 app:cardElevation="0dp">
                 <androidx.recyclerview.widget.RecyclerView
@@ -73,7 +74,7 @@
                     android:overScrollMode="never"
                     android:background="@color/light_gray"
                     tools:itemCount="5"
-                    tools:listitem="@layout/view_alien_card" />
+                    tools:listitem="@layout/view_alien_card"/>
             </androidx.cardview.widget.CardView>
             <View
                 android:id="@+id/view_bottom"
@@ -82,6 +83,12 @@
                 android:layout_below="@id/view_center"/>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/vertical_margin"
+        android:layout_below="@id/relative_top"
+        android:background="@drawable/bg_gradient_shadow_top"/>
 
     <TextView
         android:id="@+id/text_no_cards"

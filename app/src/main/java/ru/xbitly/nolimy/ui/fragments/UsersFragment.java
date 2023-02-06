@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,8 +43,6 @@ public class UsersFragment extends Fragment {
     private AlienCardGet alienCardGet;
     private AlienCardsListAdapter adapter;
     private AlienCard alienCard;
-    private NfcAdapter nfcAdapter;
-    private TextView textViewNoCards;
 
     private boolean snackbarIsDismissed = false;
 
@@ -62,15 +60,18 @@ public class UsersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        nfcAdapter = NfcAdapter.getDefaultAdapter(context);
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
         EditText editTextSearch = view.findViewById(R.id.edit_text_search);
-        textViewNoCards = view.findViewById(R.id.text_no_cards);
+        TextView textViewNoCards = view.findViewById(R.id.text_no_cards);
         ImageButton imageButton =  view.findViewById(R.id.button_qrcode);
 
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new AlienCardsListAdapter(null, context, textViewNoCards));
         recyclerView.setNestedScrollingEnabled(false);
 

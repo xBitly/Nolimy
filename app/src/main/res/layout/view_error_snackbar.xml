@@ -4,9 +4,9 @@
     android:id="@+id/view_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_blue_snackbar">
+    android:background="@drawable/bg_red_snackbar">
     <TextView
-        android:id="@+id/text_success"
+        android:id="@+id/text_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/title_size"
@@ -15,6 +15,6 @@
         android:layout_marginEnd="@dimen/item_horizontal_margin"
         android:layout_marginTop="@dimen/center_margin"
         android:layout_marginBottom="@dimen/center_margin"
-        android:text="@string/success"
+        android:text="@string/error"
         android:fontFamily="@font/montserrat_semibold"/>
 </RelativeLayout>

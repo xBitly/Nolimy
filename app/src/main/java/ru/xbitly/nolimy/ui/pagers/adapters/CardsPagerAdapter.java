@@ -1,26 +1,22 @@
 package ru.xbitly.nolimy.ui.pagers.adapters;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import ru.xbitly.nolimy.R;
 public class CardsPagerAdapter extends PagerAdapter{
-    private Context context;
-    private int[] resIds;
+    private final Context context;
+    private final int[] resIds;
 
     public CardsPagerAdapter(int[] resIds, Context context) {
         this.context = context;
         this.resIds = resIds;
-        Log.e("r", String.valueOf(getCount()));
     }
 
     @Override
@@ -43,9 +39,6 @@ public class CardsPagerAdapter extends PagerAdapter{
 
         imageView = itemView.findViewById(R.id.image_view);
         imageView.setImageResource(resIds[position]);
-
-        //imageView.getLayoutParams().height = imageView.getLayoutParams().height;
-        //imageView.requestLayout();
 
         container.addView(itemView);
 

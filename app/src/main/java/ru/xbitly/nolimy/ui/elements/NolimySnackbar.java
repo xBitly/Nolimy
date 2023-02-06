@@ -20,6 +20,7 @@ public class NolimySnackbar {
     private Button buttonAction;
     private TextView textSuccess;
     private TextView textInfo;
+    private TextView textError;
     private TextView textAction;
     private View snackView;
     private Snackbar.SnackbarLayout layout;
@@ -61,6 +62,18 @@ public class NolimySnackbar {
         getSnackView().setOnClickListener(view1 -> dismiss());
     }
 
+    @SuppressLint("InflateParams")
+    public void createErrorSnackbar(Context context, View view){
+        this.context = context;
+        this.snackbar = Snackbar.make(view, "", Snackbar.LENGTH_SHORT);
+        layout = (Snackbar.SnackbarLayout) snackbar.getView();
+
+        snackView = LayoutInflater.from(context).inflate(R.layout.view_error_snackbar, null);
+        textError = snackView.findViewById(R.id.text_error);
+
+        getSnackView().setOnClickListener(view1 -> dismiss());
+    }
+
     public void addSnackbarCallback(Snackbar.Callback callback){
         snackbar.addCallback(callback);
     }
@@ -83,6 +96,10 @@ public class NolimySnackbar {
 
     public TextView getTextInfo(){
         return textInfo;
+    }
+
+    public TextView getTextError(){
+        return textError;
     }
 
     public void show(){

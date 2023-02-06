@@ -32,7 +32,7 @@
             android:paddingStart="@dimen/horizontal_margin"
             android:paddingEnd="@dimen/horizontal_margin"
             android:textColor="@color/white_30"
-            android:fontFamily="@font/montserrat_semibold"/>
+            android:fontFamily="@font/montserrat"/>
     </RelativeLayout>
 
     <RelativeLayout

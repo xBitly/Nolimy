@@ -27,5 +27,6 @@
         android:singleLine="true"
         android:textColor="@color/white_selector"
         android:textSize="@dimen/text_size"
+        android:linksClickable="true"
         tools:text="+7 987 654 3210" />
 </LinearLayout>

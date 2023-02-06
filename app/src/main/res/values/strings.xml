@@ -22,4 +22,6 @@
     <string name="nfc_disabled">NFC is disabled</string>
     <string name="write">Write</string>
     <string name="support">Support</string>
+    <string name="error">Error</string>
+    <string name="success">Success</string>
 </resources>

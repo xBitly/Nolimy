@@ -9,20 +9,15 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
-import java.util.Objects;
 
 import ru.xbitly.nolimy.db.system.DatabaseClient;
 import ru.xbitly.nolimy.ui.pagers.adapters.CardsPagerAdapter;
-import ru.xbitly.nolimy.ui.recyclers.adapters.AlienCardsListAdapter;
 import ru.xbitly.nolimy.ui.recyclers.adapters.CardContentListAdapter;
 
 public class MyCardGet extends AsyncTask<Void, Void, List<MyCard>> {
@@ -46,6 +41,7 @@ public class MyCardGet extends AsyncTask<Void, Void, List<MyCard>> {
     private CardsPagerAdapter cardsPagerAdapter;
     private final SharedPreferences preferences;
     private final SharedPreferences.Editor editor;
+    private MyCard myCard;
 
     private List<MyCard> myCards;
 
@@ -91,16 +87,17 @@ public class MyCardGet extends AsyncTask<Void, Void, List<MyCard>> {
             viewPager.setPageTransformer(false, (view, positionOffset) -> view.setAlpha(1 - positionOffset));
             int position = preferences.getInt("position_my_card", 0);
             viewPager.setCurrentItem(position);
+            this.myCard = myCardList.get(position);
             textViewName.setText(myCards.get(position).getName());
             textViewDescription.setText(myCards.get(position).getDescription());
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(new CardContentListAdapter(myCards.get(position).getContent(), context));
         }
+    }
 
-        buttonWrite.setOnClickListener(view -> {
-
-        });
+    public MyCard getMyCard() {
+        return myCard;
     }
 
     public void setViewPager(ViewPager viewPager){
@@ -120,11 +117,12 @@ public class MyCardGet extends AsyncTask<Void, Void, List<MyCard>> {
         @Override
         public void onPageSelected(int position) {
             if (myCards == null) return;
-            textViewName.setText(myCards.get(position).getName());
-            textViewDescription.setText(myCards.get(position).getDescription());
+            myCard = myCards.get(position);
+            textViewName.setText(myCard.getName());
+            textViewDescription.setText(myCard.getDescription());
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new CardContentListAdapter(myCards.get(position).getContent(), context));
+            recyclerView.setAdapter(new CardContentListAdapter(myCard.getContent(), context));
             editor.putInt("position_my_card", position);
             editor.apply();
         }

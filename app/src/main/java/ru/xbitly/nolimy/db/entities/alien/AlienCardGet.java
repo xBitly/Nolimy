@@ -3,12 +3,9 @@ package ru.xbitly.nolimy.db.entities.alien;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
