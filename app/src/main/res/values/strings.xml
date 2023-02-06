@@ -24,4 +24,12 @@
     <string name="support">Support</string>
     <string name="error">Error</string>
     <string name="success">Success</string>
+    <string name="email_support">nolimy.dev@gmail.com</string>
+    <string name="subject_support">Nolimy Appeal</string>
+    <string name="delete">Delete</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="add_content"><u>Add content</u></string>
 </resources>

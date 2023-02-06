@@ -7,5 +7,4 @@
         android:startColor="@color/main_gradient_start"
         android:centerColor="@color/main_gradient_center"
         android:endColor="@color/main_gradient_end" />
-    <corners android:radius="@dimen/corner_radius"/>
 </shape>

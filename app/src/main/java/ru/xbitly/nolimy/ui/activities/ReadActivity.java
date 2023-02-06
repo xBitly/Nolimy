@@ -68,8 +68,8 @@ public class ReadActivity extends AppCompatActivity {
         buttonSupport.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:"));
-            intent.putExtra(Intent.EXTRA_EMAIL, "nolimy.dev@gmail.com");
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Nolimy Appeal");
+            intent.putExtra(Intent.EXTRA_EMAIL, getText(R.string.email_support));
+            intent.putExtra(Intent.EXTRA_SUBJECT, getText(R.string.subject_support));
             startActivity(intent);
         });
     }

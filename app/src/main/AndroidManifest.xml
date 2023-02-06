@@ -17,9 +17,15 @@
         android:theme="@style/Theme.Nolimy"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.WriteActivity"
+            android:name=".CreateActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
+        <activity
+            android:name=".ui.activities.WriteActivity"
+            android:exported="false"></activity>
         <activity
             android:name=".ui.activities.ReadActivity"
             android:exported="false"

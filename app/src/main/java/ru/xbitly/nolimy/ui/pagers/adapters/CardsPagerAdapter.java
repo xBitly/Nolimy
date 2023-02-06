@@ -1,10 +1,12 @@
 package ru.xbitly.nolimy.ui.pagers.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
@@ -29,16 +31,18 @@ public class CardsPagerAdapter extends PagerAdapter{
         return view == object;
     }
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        ImageView imageView;
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.view_card_pager, container, false);
 
-        imageView = itemView.findViewById(R.id.image_view);
+        ImageView imageView = itemView.findViewById(R.id.image_view);
+        TextView textView = itemView.findViewById(R.id.text_count);
         imageView.setImageResource(resIds[position]);
+        textView.setText((position + 1) + " .. " + getCount());
 
         container.addView(itemView);
 
