@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             tools:text="SEO and developer"
             android:textSize="@dimen/text_size"
-            android:singleLine="true"
+            android:singleLine="false"
             android:layout_below="@id/text_name"
             android:layout_marginStart="@dimen/item_horizontal_margin"
             android:layout_marginTop="@dimen/center_margin"

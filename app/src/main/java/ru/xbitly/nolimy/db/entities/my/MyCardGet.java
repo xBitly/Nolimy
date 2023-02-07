@@ -4,17 +4,20 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import java.util.List;
+import java.util.Objects;
 
 import ru.xbitly.nolimy.db.system.DatabaseClient;
 import ru.xbitly.nolimy.ui.pagers.adapters.CardsPagerAdapter;
@@ -35,7 +38,7 @@ public class MyCardGet extends AsyncTask<Void, Void, List<MyCard>> {
     @SuppressLint("StaticFieldLeak")
     private final RecyclerView recyclerView;
     @SuppressLint("StaticFieldLeak")
-    private final RelativeLayout relativeLayout;
+    private final NestedScrollView relativeLayout;
     @SuppressLint("StaticFieldLeak")
     private final Button buttonWrite;
     private CardsPagerAdapter cardsPagerAdapter;
@@ -46,7 +49,7 @@ public class MyCardGet extends AsyncTask<Void, Void, List<MyCard>> {
     private List<MyCard> myCards;
 
     public MyCardGet(Context context, RelativeLayout relativeLayoutNoCards, TextView textViewName,
-                     TextView textViewDescription, RecyclerView recyclerView, RelativeLayout relativeLayout,
+                     TextView textViewDescription, RecyclerView recyclerView, NestedScrollView relativeLayout,
                      Button buttonWrite){
         this.context = context;
         this.relativeLayoutNoCards = relativeLayoutNoCards;
@@ -86,6 +89,10 @@ public class MyCardGet extends AsyncTask<Void, Void, List<MyCard>> {
             viewPager.addOnPageChangeListener(pageChangeListener);
             viewPager.setPageTransformer(false, (view, positionOffset) -> view.setAlpha(1 - positionOffset));
             int position = preferences.getInt("position_my_card", 0);
+            if (position == -1) position = cardsPagerAdapter.getCount() - 1;
+            if (position > cardsPagerAdapter.getCount() - 1) position = cardsPagerAdapter.getCount() - 1;
+            editor.putInt("position_my_card", position);
+            editor.apply();
             viewPager.setCurrentItem(position);
             this.myCard = myCardList.get(position);
             textViewName.setText(myCards.get(position).getName());

@@ -40,9 +40,7 @@ public class CardsPagerAdapter extends PagerAdapter{
         View itemView = inflater.inflate(R.layout.view_card_pager, container, false);
 
         ImageView imageView = itemView.findViewById(R.id.image_view);
-        TextView textView = itemView.findViewById(R.id.text_count);
         imageView.setImageResource(resIds[position]);
-        textView.setText((position + 1) + " .. " + getCount());
 
         container.addView(itemView);
 

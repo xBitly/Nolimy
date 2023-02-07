@@ -57,13 +57,7 @@ public class ReadActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        buttonBack.setOnClickListener(view -> {
-            Intent intent = new Intent(ReadActivity.this, MainActivity.class);
-            startActivity(intent);
-            //TODO: anim
-            overridePendingTransition(0, 0);
-            finish();
-        });
+        buttonBack.setOnClickListener(view -> onBackPressed());
 
         buttonSupport.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
@@ -72,6 +66,15 @@ public class ReadActivity extends AppCompatActivity {
             intent.putExtra(Intent.EXTRA_SUBJECT, getText(R.string.subject_support));
             startActivity(intent);
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(ReadActivity.this, MainActivity.class);
+        startActivity(intent);
+        //TODO: anim
+        overridePendingTransition(0, 0);
+        finish();
     }
 
     @Override

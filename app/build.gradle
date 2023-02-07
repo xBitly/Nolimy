@@ -10,8 +10,8 @@ android {
         applicationId "ru.xbitly.nolimy"
         minSdk 23
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "0.3"
     }
 
     buildTypes {
@@ -34,7 +34,6 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.7.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation "android.arch.persistence.room:runtime:1.1.1"
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     implementation 'com.google.code.gson:gson:2.8.6'
 

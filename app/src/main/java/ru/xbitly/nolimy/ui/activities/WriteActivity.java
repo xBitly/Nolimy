@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -32,8 +34,14 @@ public class WriteActivity extends AppCompatActivity {
     private String json;
     private RelativeLayout relativeLayout;
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
@@ -72,6 +80,16 @@ public class WriteActivity extends AppCompatActivity {
                 nolimySnackbar.show();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(WriteActivity.this, MainActivity.class);
+        editor.putInt("fragment", R.id.profile);
+        editor.apply();
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+        finish();
     }
 
     @Override

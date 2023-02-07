@@ -2,7 +2,9 @@ package ru.xbitly.nolimy.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -18,14 +20,20 @@ public class MainActivity extends AppCompatActivity {
 
     private NfcAdapter nfcAdapter;
     private boolean nfcIsSupported = true;
+    private BottomNavigationView bottomNavigationView;
+
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @SuppressLint({"NonConstantResourceId", "UseCompatLoadingForDrawables"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         ImageButton imageButtonRead = findViewById(R.id.button_read);
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -37,15 +45,18 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.users:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment, usersFragment).commit();
+                    editor.putInt("fragment", R.id.users);
+                    editor.apply();
                     return true;
 
                 case R.id.profile:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profileFragment).commit();
+                    editor.putInt("fragment", R.id.profile);
+                    editor.apply();
                     return true;
             }
             return false;
         });
-        bottomNavigationView.setSelectedItemId(R.id.users);
 
         if (nfcAdapter == null) {
             imageButtonRead.setImageDrawable(getDrawable(R.drawable.ic_qrcode_24));
@@ -69,5 +80,11 @@ public class MainActivity extends AppCompatActivity {
             finish();
 
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bottomNavigationView.setSelectedItemId(sharedPreferences.getInt("fragment", R.id.users));
     }
 }
