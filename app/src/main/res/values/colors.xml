@@ -19,4 +19,12 @@
     <color name="main_gradient_start">#9F80F9</color>
     <color name="main_gradient_center">#C471ED</color>
     <color name="main_gradient_end">#6880FE</color>
+
+    <!--second gradient-->
+    <color name="second_gradient_start">#EECDA3</color>
+    <color name="second_gradient_end">#EF629F</color>
+
+    <!--third gradient-->
+    <color name="third_gradient_start">#00F5A0</color>
+    <color name="third_gradient_end">#00D9F5</color>
 </resources>

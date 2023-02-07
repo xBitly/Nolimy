@@ -71,6 +71,26 @@
                 android:layout_height="100dp"
                 tools:src="@drawable/bg_first_gradient_card"/>
         </androidx.cardview.widget.CardView>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view_colors"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:overScrollMode="never">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_colors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/center_margin"
+                    android:overScrollMode="never"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/view_colors"/>
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -144,7 +164,7 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:paddingStart="30dp"
-                android:paddingEnd="30dp"
+                android:paddingEnd="0dp"
                 android:text="@string/add_content"
                 android:textColor="@color/white_selector"
                 android:fontFamily="@font/montserrat_semibold"/>
@@ -156,7 +176,6 @@
                 android:layout_below="@id/button_add_content"/>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/vertical_margin"

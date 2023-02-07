@@ -24,6 +24,7 @@ import ru.xbitly.nolimy.db.entities.my.MyCardDelete;
 import ru.xbitly.nolimy.db.entities.my.MyCardEdit;
 import ru.xbitly.nolimy.db.entities.my.MyCardSave;
 import ru.xbitly.nolimy.ui.elements.NolimySnackbar;
+import ru.xbitly.nolimy.ui.recyclers.adapters.ColorsListAdapter;
 import ru.xbitly.nolimy.ui.recyclers.adapters.ContentEditsListAdapter;
 
 public class CreateActivity extends AppCompatActivity {
@@ -44,10 +45,13 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create);
 
         myCard = (MyCard) getIntent().getSerializableExtra("card");
+        int[] resIds = {R.drawable.bg_first_gradient_card, R.drawable.bg_second_gradient_card, R.drawable.bg_third_gradient_card};
+        String[] resNames = {"Violet", "Peach", "Grass"};
 
         EditText editTextName = findViewById(R.id.edit_text_name);
         EditText editTextDescription = findViewById(R.id.edit_text_description);
         RecyclerView recyclerView = findViewById(R.id.recycler);
+        RecyclerView recyclerViewColors = findViewById(R.id.recycler_colors);
         ImageView imageView = findViewById(R.id.image_view);
         ImageButton buttonBack = findViewById(R.id.button_back);
         Button buttonAddContent = findViewById(R.id.button_add_content);
@@ -56,8 +60,11 @@ public class CreateActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewColors.setHasFixedSize(true);
+        recyclerViewColors.setLayoutManager(new LinearLayoutManager(this));
 
         ContentEditsListAdapter contentEditsListAdapter;
+        ColorsListAdapter colorsListAdapter = new ColorsListAdapter(resIds, resNames, this, imageView);
 
         if (myCard != null) {
             contentEditsListAdapter = new ContentEditsListAdapter(myCard.getContent(), this);
@@ -78,6 +85,7 @@ public class CreateActivity extends AppCompatActivity {
         }
 
         recyclerView.setAdapter(contentEditsListAdapter);
+        recyclerViewColors.setAdapter(colorsListAdapter);
 
         buttonAddContent.setOnClickListener(view -> contentEditsListAdapter.setCount(contentEditsListAdapter.getItemCount() + 1));
 
@@ -112,6 +120,7 @@ public class CreateActivity extends AppCompatActivity {
             myCard.setName(name);
             myCard.setDescription(description);
             myCard.setContent(mapContent);
+            myCard.setBackground(colorsListAdapter.getColor());
             NolimySnackbar nolimySnackbar = new NolimySnackbar();
             if (isEdit){
                 MyCardEdit myCardEdit = new MyCardEdit(this, myCard);
@@ -119,12 +128,12 @@ public class CreateActivity extends AppCompatActivity {
             } else {
                 MyCardSave myCardSave = new MyCardSave(this, myCard);
                 myCardSave.execute();
+                editor.putInt("position_my_card", -1);
+                editor.apply();
             }
             nolimySnackbar.createSuccessSnackbar(this, view);
             nolimySnackbar.getTextSuccess().setText(getText(R.string.saved));
             nolimySnackbar.show();
-            editor.putInt("position_my_card", -1);
-            editor.apply();
             onBackPressed();
         });
 
